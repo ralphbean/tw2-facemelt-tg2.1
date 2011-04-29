@@ -1,0 +1,4 @@
+recursive-include tw2facemelttg21/public *
+include tw2facemelttg21/public/favicon.ico
+recursive-include tw2facemelttg21/i18n *
+recursive-include tw2facemelttg21/templates *
