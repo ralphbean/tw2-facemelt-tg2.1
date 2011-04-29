@@ -60,3 +60,4 @@ def init_model(engine):
 
 # Import your model modules here.
 from tw2facemelttg21.model.auth import User, Group, Permission
+from bloglog import ServerHit

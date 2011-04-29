@@ -26,6 +26,13 @@ class BaseController(TGController):
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
 
+        entry = model.ServerHit(
+            remote_addr=environ['REMOTE_ADDR'],
+            path_info=environ['PATH_INFO'],
+            query_string=environ['QUERY_STRING'],
+        )
+        model.DBSession.add(entry)
+
         request.identity = request.environ.get('repoze.who.identity')
         tmpl_context.identity = request.identity
         return TGController.__call__(self, environ, start_response)
