@@ -12,6 +12,8 @@ from tw2facemelttg21.controllers.secure import SecureController
 
 from tw2facemelttg21.controllers.error import ErrorController
 
+from tw2facemelttg21.widgets import LogGrid
+
 __all__ = ['RootController']
 
 
@@ -36,7 +38,11 @@ class RootController(BaseController):
     @expose('tw2facemelttg21.templates.index')
     def index(self):
         """Handle the front-page."""
-        return dict(page='index')
+        return dict(page='index',gridwidget=LogGrid)
+
+    @expose('json')
+    def jqgrid(self, *args, **kw):
+        return LogGrid.request(request).body
 
     @expose('tw2facemelttg21.templates.about')
     def about(self):
