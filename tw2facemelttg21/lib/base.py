@@ -8,6 +8,8 @@ from tg import request
 from pylons.i18n import _, ungettext, N_
 import tw2facemelttg21.model as model
 
+from tw2.jqplugins.ui import set_ui_theme_name
+
 __all__ = ['BaseController']
 
 
@@ -25,6 +27,8 @@ class BaseController(TGController):
         # TGController.__call__ dispatches to the Controller method
         # the request is routed to. This routing information is
         # available in environ['pylons.routes_dict']
+
+        set_ui_theme_name('hot-sneaks')
 
         entry = model.ServerHit(
             remote_addr=environ['REMOTE_ADDR'],

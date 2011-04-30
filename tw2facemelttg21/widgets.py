@@ -21,7 +21,7 @@ class LogGrid(SQLAjqGridWidget):
         'rowList':[15,150, 1500],
         'viewrecords':True,
         'imgpath': 'scripts/jqGrid/themes/green/images',
-        'width': 525,
+        'shrinkToFit' : True,
         'height': 'auto',
     }
 
