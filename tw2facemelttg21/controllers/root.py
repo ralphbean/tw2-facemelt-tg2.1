@@ -15,6 +15,7 @@ from tw2facemelttg21.controllers.error import ErrorController
 
 from tw2facemelttg21.widgets import LogGrid
 from tw2facemelttg21.widgets import LogPlot
+import tw2.jqplugins.portlets as p
 
 import sqlalchemy
 import datetime
@@ -70,7 +71,23 @@ class RootController(BaseController):
         plotwidget = LogPlot(data=jqplot_params['data'])
         plotwidget.options = recursive_update(
             plotwidget.options, jqplot_params['options'])
-        return dict(page='index', gridwidget=LogGrid, plotwidget=plotwidget)
+
+        colwidth = '50%'
+        class LayoutWidget(p.ColumnLayout):
+            id = 'awesome-layout'
+            class col1(p.Column):
+                width = colwidth
+                class por1(p.Portlet):
+                    title = 'DB Entries of Server Hits'
+                    widget = LogGrid
+
+            class col2(p.Column):
+                width = colwidth
+                class por2(p.Portlet):
+                    title = 'Hits over the last hour'
+                    widget = plotwidget
+
+        return dict(page='index', layoutwidget=LayoutWidget)
 
     @expose('json')
     def jqgrid(self, *args, **kw):
@@ -101,7 +118,7 @@ class RootController(BaseController):
         ]
 
         options = { 'axes' : { 'xaxis': {
-            'ticks': [u.strftime("%I:%M:%S %p") for l, u in t_bounds],
+            'ticks': [u.strftime("%I:%M:%S") for l, u in t_bounds],
         }}}
 
         return dict(data=data, options=options)

@@ -37,6 +37,7 @@ setup(
         "tw.forms",
         "tw2.jqplugins.jqgrid",
         "tw2.jqplugins.jqplot",
+        "tw2.jqplugins.portlets",
         ],
     setup_requires=["PasteScript >= 1.7"],
     paster_plugins=['PasteScript', 'Pylons', 'TurboGears2'],
