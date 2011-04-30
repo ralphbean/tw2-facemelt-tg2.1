@@ -27,6 +27,10 @@ class LogGrid(SQLAjqGridWidget):
 
 class LogPlot(JQPlotWidget):
     id = 'awesome-logplot'
+    resources = JQPlotWidget.resources + [
+        categoryAxisRenderer_js,
+        barRenderer_js,
+    ]
 
     options = {
         'seriesDefaults' : {
@@ -40,8 +44,3 @@ class LogPlot(JQPlotWidget):
             'yaxis': {'min': 0, },
         }
     }
-
-    def prepare(self):
-        self.resources.append(categoryAxisRenderer_js)
-        self.resources.append(barRenderer_js)
-        super(LogPlot, self).prepare()
