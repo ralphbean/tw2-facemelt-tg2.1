@@ -2,6 +2,10 @@
 import tw2facemelttg21.model as model
 from tw2.jqplugins.jqgrid import SQLAjqGridWidget
 
+from tw2.jqplugins.jqplot import JQPlotWidget
+from tw2.jqplugins.jqplot.base import categoryAxisRenderer_js, barRenderer_js
+from tw2.core import JSSymbol
+
 class LogGrid(SQLAjqGridWidget):
     id = 'awesome-loggrid'
     entity = model.ServerHit
@@ -19,4 +23,26 @@ class LogGrid(SQLAjqGridWidget):
         'imgpath': 'scripts/jqGrid/themes/green/images',
         'width': 900,
         'height': 'auto',
+    }
+
+class LogPlot(JQPlotWidget):
+    id = 'awesome-logplot'
+    interval = 2000
+
+    def prepare(self):
+        self.resources.append(categoryAxisRenderer_js)
+        self.resources.append(barRenderer_js)
+        super(LogPlot, self).prepare()
+
+    options = {
+        'seriesDefaults' : {
+            'renderer': JSSymbol('$.jqplot.BarRenderer'),
+            'rendererOptions': { 'barPadding': 4, 'barMargin': 10 }
+        },
+        'axes' : {
+            'xaxis': {
+                'renderer': JSSymbol(src="$.jqplot.CategoryAxisRenderer"),
+            },
+            'yaxis': {'min': 0, },
+        }
     }
