@@ -36,6 +36,7 @@ class BaseController(TGController):
             query_string=environ['QUERY_STRING'],
         )
         model.DBSession.add(entry)
+        model.DBSession.flush()
 
         request.identity = request.environ.get('repoze.who.identity')
         tmpl_context.identity = request.identity
